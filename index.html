@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Cello Translator</title>
+  <meta name="description" content="German speech becomes a cello melody, then the Chinese translation whose tones best fit it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <header class="masthead">
+      <p class="label">大提琴翻译器</p>
+      <h1>The Cello Translator</h1>
+      <p class="lede">Say a German sentence. Your voice becomes a cello line, and the line chooses the Chinese translation whose tones it can carry.</p>
+    </header>
+
+    <section>
+      <h2 class="label"><span>01</span> Sentence</h2>
+      <ol id="sentences" class="sentences"></ol>
+      <ul id="pool" class="pool"></ul>
+    </section>
+
+    <section>
+      <h2 class="label"><span>02</span> Voice</h2>
+      <div class="controls">
+        <button id="record" class="record">Hold to record</button>
+        <label class="link">Upload WAV<input id="upload" type="file" accept="audio/wav,audio/*" hidden></label>
+        <button id="demo" class="link">Try a demo voice</button>
+      </div>
+      <div class="toggles">
+        <div class="toggle" data-key="raw"><span class="label">Pitch</span><button data-v="scale" class="on">D minor</button><button data-v="raw">Raw</button></div>
+        <div class="toggle" data-key="cello"><span class="label">Cello</span><button data-v="sampled" class="on">Sampled</button><button data-v="synth">Synthesized</button></div>
+      </div>
+      <p id="status" class="status" aria-live="polite"></p>
+    </section>
+
+    <section id="results" class="results" hidden>
+      <h2 class="label"><span>03</span> Translation</h2>
+
+      <div class="lane">
+        <p class="label">German · pitch</p>
+        <canvas id="wave"></canvas>
+      </div>
+
+      <div class="scroller">
+        <div class="lane">
+          <p class="label">Cello</p>
+          <div id="staff" class="staff"></div>
+        </div>
+        <div class="lane">
+          <p class="label" id="lane-zh-label">Chinese · best fit</p>
+          <div id="chinese" class="chinese"></div>
+        </div>
+      </div>
+
+      <div class="playbar">
+        <button id="play-cello" class="link">Play cello</button>
+        <button id="speak" class="link">Speak Chinese</button>
+        <button id="play-both" class="link">Play both</button>
+        <span class="fit"><span class="label">Fit</span><span id="score-big"></span></span>
+      </div>
+
+      <h2 class="label"><span>04</span> All candidates</h2>
+      <ol id="ranking" class="ranking"></ol>
+    </section>
+
+    <footer>
+      <p class="label"><a href="test.html">Tests</a> · Cello samples: flcellogrl / Freesound, via tonejs-instruments, CC BY 3.0</p>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
